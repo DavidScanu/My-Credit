@@ -50,34 +50,12 @@
   </p>
 </div>
 
+<!-- Built With -->
+### Built With
 
+[![fastapi][fastapi-shield]][fastapi-url]
 
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
-  </ol>
-</details>
-
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- ABOUT THE PROJECT -->
 ## Contexte du projet
@@ -93,35 +71,14 @@ En tant que data scientist, machine learning engineer, - installer et créer un 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-### Built With
-
-[![fastapi][fastapi-shield]][fastapi-url]
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-<!-- GETTING STARTED -->
-## Getting Started
-
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- USAGE EXAMPLES -->
-## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 ## Modalités pédagogiques
 
 Le projet sera à réaliser en trois jours, chaque équipe est constituée de 3 développeurs, une par feature :
 - FRONT (developpement de l'application front)
 - BACK (développement de l'API back)
 - MODEL (entrainemment du modèle).
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- ROADMAP -->
 ## Roadmap
@@ -149,9 +106,7 @@ Le projet sera à réaliser en trois jours, chaque équipe est constituée de 3 
 
 - Déployez une application **MLFlow** puis déployez la sur Heroku à l'aide de Docker.
 
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 <!-- CONTACT -->
 ## Contact
