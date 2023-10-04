@@ -8,9 +8,10 @@
 # ==============================================================================
 
 import base64
+import json
 import requests
 import streamlit as st
-# from app import *
+
 
 ## --- APP --- ##
 def set_background(background_img):
@@ -38,3 +39,31 @@ def set_background(background_img):
     )
 
 
+def create_JSON(age, matrimonial, education, work, salary, credit_failure,
+                housing_credit, personal_credit, contact, contact_type, 
+                nbr_contact_actual, nbr_contact_past, day, month,second):
+
+    if matrimonial == "Marié.e": matrimonial = "marié"
+    elif matrimonial == "Divorcé.e": matrimonial = "divorcé"
+
+    for_predict = {
+        "age": age, 
+        "matrimonial": matrimonial,
+        "education": education,
+        "work": work,
+        "salary": salary, 
+        "credit_failure": credit_failure,
+        "housing_credit": housing_credit, 
+        "personal_credit": personal_credit, 
+        "contact": contact, 
+        "contact_type": contact_type, 
+        "nbr_contact_actual": nbr_contact_actual, 
+        "nbr_contact_past": nbr_contact_past,
+        "day": day,
+        "month": month,
+        "second": second
+    }
+
+    reponse = requests.post('http://', json=for_predict)
+
+    return reponse
