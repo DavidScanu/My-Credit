@@ -79,16 +79,19 @@
 </details>
 
 
-
 <!-- ABOUT THE PROJECT -->
-## About The Project
+## Contexte du projet
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+La banque pour laquelle vous travaillez veut publier assez rapidement son POC (Proof of Concept - Preuve de concept) : Une application permettant à un utilisateur de faire une demande de crédit en ligne.
 
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
+En tant que data scientist, machine learning engineer, - installer et créer un environment de développement correct :
+
+- mettre en place un environement de développement Git/Github
+- entrainer un modèle de classification binaire
+- déployer l'API et le modèle dans le cloud
+- déployer une application front à l'aide de streamlit
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 
 ### Built With
@@ -113,15 +116,39 @@ Use this space to show useful examples of how a project can be used. Additional 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+## Modalités pédagogiques
+
+Le projet sera à réaliser en trois jours, chaque équipe est constituée de 3 développeurs, une par feature :
+- FRONT (developpement de l'application front)
+- BACK (développement de l'API back)
+- MODEL (entrainemment du modèle).
+
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-    - [ ] Nested Feature
+### Partie 1 - Configuration du projet
 
-See the [open issues](https://github.com/github_username/repo_name/issues) for a full list of proposed features (and known issues).
+- Créez des groupes de 3 personnes maximum puis répartissez vous les tâches (Front, Back, Model).
+- Désignez un tech lead qui aura à sa charge le répertoir du projet Github. → Le Tech Lead doit faire un fork du projet Github suivant → Ajouter les membres de son équipe au projet github. → Copiez le tablaeu suivant.
+- Téléchargez le logiciel Github Desktop puis clonnez en local votre projet.
+- Créez un fichier **Readme** sur chacune des branches dont vous avez la charge puis faites un commit et un push afin de vérifier la bonne configuration du projet.
+
+### Partie 2 - Développement des features
+
+- **Développez le Front** : Le front de l’API sera développez avec le Framework Streamlit. → Présence d’un formulaire permettant à l’utilisateur de renseigner ses informations personnelles. → Le programme fait une requête POST à l’API. → Le programme affiche la réponse de l’accord de crédit.
+- **Concevez le modèle** : Le modèle de classification sera développez avec la bibliothèque de votre choix (Sklearn, Tensorflow, PyTorch). → Le modèle doit avoir une accuracy d’au moins 90%. → Les données passez au modèle doivent être standardisées. → Le modèle doit être sauvegardée au format pickle.
+- **Développez l’API** : L’API du sera développée avec le framework FastAPI. → Un point de terminaison predict doit être créé avec une méthode POST. → Le point de terminaison predict gère les structure de données avec la bibliothèque pydantic. → La réponse doit être sous forme d’une chaîne de caractère ou sous forme d’un json.
+
+### Partie 3 - Développement de Tests Unitaires
+
+- **Testez le modèle** : → Testez la fonction qui importe les données. → Testez la fonction qui standardise les données. → Testez la fonction qui entraîne le modèle.
+- **Testez l’API** : → Testez la réponse de l’API → Testez la sortie de l’api → Testez le type de données passées en entrée.
+- Déployez vos tests unitaires et déployez votre API sur Heroku à l'aide de Github actions.
+​
+### Partie 4 - Monitoring de modèle avec MLFlow
+
+- Déployez une application **MLFlow** puis déployez la sur Heroku à l'aide de Docker.
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
