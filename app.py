@@ -17,22 +17,26 @@ app = FastAPI(
 
 # Import model 
 
-
 # Import Label Encoder (pour encoder les variables)
-
-
 
 # Variables
 # Pydantic is the most widely used data validation library for Python.
 class PredictParams(BaseModel):
   age : int
+  matrimonial : str
+  education : str
   work : str
-  salary : int|float
+  salary : int
   credit_failure : bool
   housing_credit : bool
   personal_credit : bool
-  matrimonial : str
-  education : str
+  contact : bool
+  contact_type : str
+  nbr_contact_actual : int
+  nbr_contact_past : int
+  day : int
+  month : str
+  second : int
 
 @app.post("/bank_loan", tags=['POST'])
 def bank_loan(params:PredictParams):
@@ -45,12 +49,8 @@ def bank_loan(params:PredictParams):
   # Prediction
 
   # Results
-  dict_ex = {
-    'prediction' : 1,
-    'score' : 0.87,
-    'n' : params.n
-  }
-  return dict_ex
+
+  return params
 
   # Sortie : 
   # la réponse du modèle
