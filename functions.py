@@ -13,6 +13,28 @@ import streamlit as st
 import time
 
 ## --- APP --- ##
+def center_radio():
+    """Center the radio button on the form"""
+
+    st.markdown("""
+        <style>
+        .stRadio [role=radiogroup]{
+            align-items: center;
+            justify-content: center;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+
+def space():
+    """Put a <br>"""
+
+    st.markdown("""
+        <style>
+            <br>
+        </style>
+    """, unsafe_allow_html=True)
+
+
 def set_background(background_img):
     """Set the app background with image in jpg format
 
@@ -37,6 +59,7 @@ def set_background(background_img):
         """,
         unsafe_allow_html=True,
     )
+
 
 
 def send_to_api(age, job, marital, education, default, balance, housing, loan, 
