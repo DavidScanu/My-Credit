@@ -15,7 +15,6 @@ import time
 ## --- APP --- ##
 def center_radio():
     """Center the radio button on the form"""
-
     st.markdown("""
         <style>
         .stRadio [role=radiogroup]{
@@ -25,9 +24,9 @@ def center_radio():
         </style>
     """, unsafe_allow_html=True)
 
-def space():
-    """Put a <br>"""
 
+def space():
+    """Add a break line"""
     st.markdown("""
         <style>
             <br>
@@ -92,9 +91,38 @@ def send_to_api(age, job, marital, education, default, balance, housing, loan,
       True, False, True, "téléphone", 2, 5, 4, jul, 60)
     """
 
-    if marital == "Marié.e": marital = "marié"
-    elif marital == "Divorcé.e": marital = "divorcé"
+    ## - Job
+    dict_job = {"admin.": 'admin.', "inconnu": 'unknown', "chômeur": 'unemployed', 
+                "gestion": 'management', "femme de ménage": 'housemaid', 
+                "entrepreneur": 'entrepreneur', "étudiant": 'student', 
+                "col bleu": 'blue-collar', "indépendant": 'self-employed', 
+                "retraité": 'retired', "technicien": 'technician', "services": 'services'}
 
+    job = dict_job[job]
+
+    ## - Marital
+    if marital == "Marié.e": marital = "married"
+    elif marital == "Divorcé.e": marital = "divorced"
+    elif marital == "Célibataire": marital = "single"
+
+    ## - Education
+    if education == "Inconnu": education = "unknown"
+    elif education == "secondaire": education = "secondary"
+    elif education == "tertiaire": education = "tertiary"
+    elif education == "primaire": education = "primary"
+
+    ## - Contact
+    if contact == "inconnu": contact = "unknown"
+    elif contact == "téléphone": contact = "telephone"
+    elif contact == "cellulaire": contact = "cellular"
+
+    ## - Boolean transformation to yes / no string
+    default = 'yes' if default == True else 'no'
+    loan = 'yes' if loan == True else 'no'
+    housing = 'yes' if housing == True else 'no'
+    pdays = 1 if pdays == True else 0
+
+    ## - Dictionary creation for send to api
     for_predict = {
         "age": age,
         "job": job,
