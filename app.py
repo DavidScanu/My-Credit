@@ -18,12 +18,6 @@ st.set_page_config(page_title='My-Credit : Simulation de crédit',
                    page_icon="assets/favicon-32x32.png",
                    layout='wide')
 
-st.markdown("""
-    <style>
-    .st-eb [role="formgroup"]{background-color: '#000000';}
-    </style>
-""", unsafe_allow_html=True)
-
 ## -- Background (if we want it)
 # set_background("assets/background-pawel-czerwinski.jpg")
 
