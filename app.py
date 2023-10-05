@@ -11,11 +11,11 @@ tags_metadata = [
   }
 ]
 
-# app = FastAPI(
-#   title = "💳 API pour l'application My Credit",
-#   description = "Lorem Ipsum Post",
-#   openapi_tags=tags_metadata
-# )
+app = FastAPI(
+  title = "💳 API pour l'application My Credit",
+  description = "Lorem Ipsum Post",
+  openapi_tags=tags_metadata
+)
 
 # Import model 
 
