@@ -40,7 +40,7 @@ pickled_object = import_pickle_object(pickel_file_path)
 cols = pickled_object['columns']
 scaler = pickled_object['scaler']
 model = pickled_object['model']
-feature_importance = pickled_object['feature_importance']
+# feature_importance = pickled_object['feature_importance']
 
 
 # Import encoding dictionnary
@@ -73,67 +73,60 @@ def encode_features(params_json_dict):
 
 # testing model prediction
 # pred = model.predict(scaler.fit_transform([range(15)]))
-pred_proba = model.predict_proba([range(15)])
-print(pred_proba)
+# pred_proba = model.predict_proba([range(15)])
+# print(pred_proba)
 
 
 
 # Prediction
 def make_prediction(params_json):
-
+  """
+  Fonction qui réalise une prédiction à partir du JSON.
+  """
   # Parse JSON
   params_dict = eval(params_json)
-
   # Encoder
-  params_enc = encode_features(params_dict)
-  print(params_enc)
-  # params_enc_list = list(params_enc.values())
-
+  params_enc = encode_features(params_dict) # dict
+  # Convert into DataFrame
+  params_enc_df = pd.DataFrame(params_enc, index=[0])
   # Scaler
-  # params_scaled = scaler.transform(params_enc_list)
-
+  params_scaled = scaler.transform(params_enc_df) # ndarray
   # Prediction
-  # pred_proba = model.predict_proba(params_scaled)
-  # print(pred_proba)
-
+  pred_proba = model.predict_proba(params_scaled)
+  y_pred = np.argmax(pred_proba)
+  pred_score = pred_proba.max()
   # Results
-  # results = {
-  #   "prediction" : 0,
-  #   "score" : 0.86,
-  #   "feature_importance" : [1, 2 ,3]
-  # }
-  # return results
+  results = {
+    "prediction" : y_pred,
+    "score" : pred_score
+    # "feature_importance" : [1, 2 ,3]
+  }
+  return results
 
 
-
-ex_json_str = "{'age': 34, 'job': 'entrepreneur', 'marital': 'married', 'education': 'tertiary', 'default': 'yes', 'balance': 35266, 'housing': 'yes', 'loan': 'no', 'contact': 'telephone', 'day': 15, 'month': 'aug', 'duration': 80, 'campaign': 2, 'pdays': 1, 'previous': 5}"
+ex_json_str = """{'age': 34, 'job': 'entrepreneur', 'marital': 'married', 'education': 'tertiary', 'default': 'yes', 'balance': 35266, 'housing': 'yes', 'loan': 'no', 'contact': 'telephone', 'day': 15, 'month': 'aug', 'duration': 80, 'campaign': 2, 'pdays': 1, 'previous': 5}"""
 
 pred = make_prediction(ex_json_str)
+print(pred)
 
-
-
-
-
-
-
-# # Variables
-# # Pydantic is the most widely used data validation library for Python.
+# Variables
+# Pydantic is the most widely used data validation library for Python.
 # class PredictParams(BaseModel):
 #   age : int
-#   matrimonial : str
+#   job : str
+#   marital : str
 #   education : str
-#   work : str
-#   salary : int
-#   credit_failure : bool
-#   housing_credit : bool
-#   personal_credit : bool
-#   contact : bool
-#   contact_type : str
-#   nbr_contact_actual : int
-#   nbr_contact_past : int
+#   default : str
+#   balance : int
+#   housing : str
+#   loan : str
+#   contact : str
 #   day : int
 #   month : str
-#   second : int
+#   duration : int
+#   campaign : int
+#   pdays : int
+#   previous : int
 
 # # API
 # @app.post("/predict", tags=['POST'])
