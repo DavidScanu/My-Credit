@@ -20,6 +20,15 @@ st.set_page_config(page_title='My-Credit : Simulation de crédit',
 
 center_radio()
 
+st.markdown("""
+    <style>
+    .stForm [role=formgroup]{
+        background-color: '#000000';
+    }
+    </style>
+""", unsafe_allow_html=True)
+
+
 ## -- Background (if we want it)
 # set_background("assets/background-pawel-czerwinski.jpg")
 
@@ -89,9 +98,8 @@ with col2:
         day_col, month_col = st.columns([1, 1])
         with day_col:
             day = st.selectbox("day",
-                ("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", 
-                "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", 
-                "24", "25", "26", "27", "28", "29", "30", "31"),
+                (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 
+                 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31),
                 index=None, placeholder="jour du dernier contact", label_visibility="hidden")
 
         with month_col:
