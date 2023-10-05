@@ -7,20 +7,18 @@
 # Streamlit Main
 # ==============================================================================
 
-import json
-import requests
+
 import streamlit as st
 
 from functions import *
 
-# response = requests.get('htt^p://0.0.0.0:8000/square?n=5' )
 
 ## -- Config
 st.set_page_config(page_title='My-Credit', 
                    page_icon="assets/favicon-32x32.png",
                    layout='wide')
 
-## -- Background
+## -- Background (if we want it)
 # set_background("assets/background-pawel-czerwinski.jpg")
 
 
@@ -81,6 +79,6 @@ with col2:
         colF1,colF2,colF3 = st.columns([2, 1, 2])
         with colF2:
             submit_button = st.form_submit_button("Valider", 
-                on_click=create_JSON(age, matrimonial, education, work, salary, 
-                credit_failure, housing_credit, personal_credit, contact, 
-                contact_type, nbr_contact_actual, nbr_contact_past, day, month, second))
+                on_click=send_to_api(age, matrimonial, education, work, salary, 
+                credit_failure, housing_credit, personal_credit, contact, contact_type, 
+                nbr_contact_actual, nbr_contact_past, day, month, second))

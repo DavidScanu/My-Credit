@@ -39,31 +39,58 @@ def set_background(background_img):
     )
 
 
-def create_JSON(age, matrimonial, education, work, salary, credit_failure,
+def send_to_api(age, matrimonial, education, work, salary, credit_failure,
                 housing_credit, personal_credit, contact, contact_type, 
                 nbr_contact_actual, nbr_contact_past, day, month,second):
+    """
+    Send the data from the form to the fast api for prediction
+
+    Params
+    ----------
+    (all required)
+    age: int
+    matrimonial: str
+    education: str
+    work: str
+    salary: int
+    credit_failure: bool
+    housing_credit: bool
+    personal_credit: bool
+    contact: bool
+    contact_type: str
+    nbr_contact_actual: int
+    nbr_contact_past: int
+    day: int
+    month: str
+    second: int
+
+    Example
+    ------
+    >>> send_to_api(59, "Marié.e", "tertiaire", "entrepreneur", 30000, True,
+      True, False, True, "téléphone", 2, 5, 4, jul, 60)
+    """
 
     if matrimonial == "Marié.e": matrimonial = "marié"
     elif matrimonial == "Divorcé.e": matrimonial = "divorcé"
 
     for_predict = {
-        "age": age, 
+        "age": age,
         "matrimonial": matrimonial,
         "education": education,
         "work": work,
-        "salary": salary, 
+        "salary": salary,
         "credit_failure": credit_failure,
-        "housing_credit": housing_credit, 
-        "personal_credit": personal_credit, 
-        "contact": contact, 
-        "contact_type": contact_type, 
-        "nbr_contact_actual": nbr_contact_actual, 
+        "housing_credit": housing_credit,
+        "personal_credit": personal_credit,
+        "contact": contact,
+        "contact_type": contact_type,
+        "nbr_contact_actual": nbr_contact_actual,
         "nbr_contact_past": nbr_contact_past,
         "day": day,
         "month": month,
         "second": second
     }
 
-    reponse = requests.post('http://', json=for_predict)
+    response = requests.post('http://', json=for_predict)
 
-    return reponse
+    return response
