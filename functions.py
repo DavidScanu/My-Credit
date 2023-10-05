@@ -68,12 +68,12 @@ def send_to_api(age, marital, education, job, balance, default, housing, loan,
       True, False, True, "téléphone", 2, 5, 4, jul, 60)
     """
 
-    if matrimonial == "Marié.e": matrimonial = "marié"
-    elif matrimonial == "Divorcé.e": matrimonial = "divorcé"
+    if marital == "Marié.e": marital = "marié"
+    elif marital == "Divorcé.e": marital = "divorcé"
 
     for_predict = {
         "age": age,
-        "matrimonial": matrimonial,
+        "marital": marital,
         "education": education,
         "job": job,
         "balance": balance,
