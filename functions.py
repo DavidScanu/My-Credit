@@ -22,6 +22,7 @@ def set_background(background_img):
     background_img: str - required (web url, or local path)
     >>> set_background("img/background.jpg")
     """
+
     set_bg = 'jpg'
 
     st.markdown(
