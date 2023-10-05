@@ -8,7 +8,6 @@
 # ==============================================================================
 
 import base64
-import json
 import requests
 import streamlit as st
 
@@ -48,22 +47,21 @@ def send_to_api(age, matrimonial, education, work, salary, credit_failure,
 
     Params
     ----------
-    (all required)
-    age: int
-    matrimonial: str
-    education: str
-    work: str
-    salary: int
-    credit_failure: bool
-    housing_credit: bool
-    personal_credit: bool
-    contact: bool
-    contact_type: str
-    nbr_contact_actual: int
-    nbr_contact_past: int
-    day: int
-    month: str
-    second: int
+    age: int - required
+    matrimonial: str - required
+    education: str - required
+    work: str - required
+    salary: int - required
+    credit_failure: bool - required
+    housing_credit: bool - required
+    personal_credit: bool - required
+    contact: bool - required
+    contact_type: str - required
+    nbr_contact_actual: int - required
+    nbr_contact_past: int - required
+    day: int - required
+    month: str - required
+    second: int - required
 
     Example
     ------
@@ -91,7 +89,7 @@ def send_to_api(age, matrimonial, education, work, salary, credit_failure,
         "month": month,
         "second": second
     }
+    print(for_predict)
+    # response = requests.post('http://', json=for_predict)
 
-    response = requests.post('http://', json=for_predict)
-
-    return response
+    # return response
