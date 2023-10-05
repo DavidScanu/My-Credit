@@ -10,7 +10,7 @@
 import base64
 import requests
 import streamlit as st
-
+import time
 
 ## --- APP --- ##
 def set_background(background_img):
@@ -39,29 +39,28 @@ def set_background(background_img):
     )
 
 
-def send_to_api(age, matrimonial, education, work, salary, credit_failure,
-                housing_credit, personal_credit, contact, contact_type, 
-                nbr_contact_actual, nbr_contact_past, day, month,second):
+def send_to_api(age, marital, education, job, balance, default, housing, loan, 
+                contact, pdays, campaign, previous, day, month, duration):
     """
     Send the data from the form to the fast api for prediction
 
     Params
     ----------
     age: int - required
-    matrimonial: str - required
+    marital: str - required
     education: str - required
-    work: str - required
-    salary: int - required
-    credit_failure: bool - required
-    housing_credit: bool - required
-    personal_credit: bool - required
+    job: str - required
+    balance: int - required
+    default: bool - required
+    housing: bool - required
+    loan: bool - required
     contact: bool - required
-    contact_type: str - required
-    nbr_contact_actual: int - required
-    nbr_contact_past: int - required
+    pdays: str - required
+    campaign: int - required
+    previous: int - required
     day: int - required
     month: str - required
-    second: int - required
+    duration: int - required
 
     Example
     ------
@@ -76,19 +75,20 @@ def send_to_api(age, matrimonial, education, work, salary, credit_failure,
         "age": age,
         "matrimonial": matrimonial,
         "education": education,
-        "work": work,
-        "salary": salary,
-        "credit_failure": credit_failure,
-        "housing_credit": housing_credit,
-        "personal_credit": personal_credit,
+        "job": job,
+        "balance": balance,
+        "default": default,
+        "housing": housing,
+        "loan": loan,
         "contact": contact,
-        "contact_type": contact_type,
-        "nbr_contact_actual": nbr_contact_actual,
-        "nbr_contact_past": nbr_contact_past,
+        "pdays": pdays,
+        "campaign": campaign,
+        "previous": previous,
         "day": day,
         "month": month,
-        "second": second
+        "duration": duration
     }
+
     print(for_predict)
     # response = requests.post('http://', json=for_predict)
 
