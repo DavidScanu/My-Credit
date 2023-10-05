@@ -13,8 +13,12 @@ import streamlit as st
 import os
 import pickle
 
+from streamlit_extras.metric_cards import style_metric_cards
+from streamlit_modal import Modal
+
 
 ## --- APP --- ##
+
 def center_radio():
     """Center the radio button on the form"""
     st.markdown("""
@@ -168,8 +172,6 @@ def get_feature_important():
     return feature_importance
 
 
-
-
 ## --- FORM PAGE --- ##
 def forms():
     """Display the 'My-Credit' form"""
@@ -268,11 +270,21 @@ def forms():
                     st.rerun()
 
 
+## --- RESPONSE PAGE --- ##
 def response_page():
     st.write("Ladies & Gentlemen, here the answer !")
+
+    col1, col2, col3 = st.columns(3)
+    col1.metric(label="Gain", value=5000, delta=1000)
+    col2.metric(label="Loss", value=5000, delta=-1000)
+    col3.metric(label="No Change", value=5000, delta=0)
+    style_metric_cards()
 
 
     st.button("Refaire une simulation", type="primary")
     if st.button:
         st.session_state.init_form = True
         st.rerun
+
+
+
