@@ -39,28 +39,29 @@ def set_background(background_img):
     )
 
 
-def send_to_api(age, marital, education, job, balance, default, housing, loan, 
-                contact, pdays, campaign, previous, day, month, duration):
+def send_to_api(age, job, marital, education, default, balance, housing, loan, 
+                contact, day, month, duration, campaign, pdays, previous):
     """
     Send the data from the form to the fast api for prediction
 
     Params
     ----------
     age: int - required
+    job: str - required
     marital: str - required
     education: str - required
-    job: str - required
-    balance: int - required
     default: bool - required
+    balance: int - required
     housing: bool - required
     loan: bool - required
     contact: bool - required
-    pdays: str - required
-    campaign: int - required
-    previous: int - required
     day: int - required
     month: str - required
     duration: int - required
+    campaign: int - required
+    pdays: str - required
+    previous: int - required
+
 
     Example
     ------
@@ -73,23 +74,27 @@ def send_to_api(age, marital, education, job, balance, default, housing, loan,
 
     for_predict = {
         "age": age,
+        "job": job,
         "marital": marital,
         "education": education,
-        "job": job,
-        "balance": balance,
         "default": default,
+        "balance": balance,
         "housing": housing,
         "loan": loan,
         "contact": contact,
-        "pdays": pdays,
-        "campaign": campaign,
-        "previous": previous,
         "day": day,
         "month": month,
-        "duration": duration
+        "duration": duration,
+        "campaign": campaign,
+        "pdays": pdays,
+        "previous": previous
     }
 
     print(for_predict)
     # response = requests.post('http://', json=for_predict)
 
     # return response
+
+
+def display_score():
+    pass

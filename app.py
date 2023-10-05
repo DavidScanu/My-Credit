@@ -105,8 +105,8 @@ with col2:
         with colF2:
             if st.form_submit_button("Valider"):
                 with st.spinner("Wait a minute"):
-                    result = send_to_api(age, marital, education, job, balance, 
-                    default, housing, loan, contact, pdays, campaign, previous, 
-                    day, month, duration)
+                    result = send_to_api(age, job, marital, education, default, 
+                        balance, housing, loan, contact, day, month, duration, 
+                        campaign, pdays, previous)
 
 
