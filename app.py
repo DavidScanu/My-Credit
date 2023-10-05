@@ -29,9 +29,9 @@ def import_pickle_object(pickle_file_path):
         pickled_object = pickle.load(f)
     # Close the file.
     f.close()
+    return pickled_object
   else:
     print("The file does not exist.")
-  return pickled_object
 
 pickel_file_path = "model_data.pkl"
 pickled_object = import_pickle_object(pickel_file_path)
@@ -69,14 +69,10 @@ def encode_features(params_json_dict):
         params_json_dict[key] = value_encoded
   return params_json_dict
 
-
-
 # testing model prediction
 # pred = model.predict(scaler.fit_transform([range(15)]))
 # pred_proba = model.predict_proba([range(15)])
 # print(pred_proba)
-
-
 
 # Prediction
 def make_prediction(params_json):
@@ -84,11 +80,11 @@ def make_prediction(params_json):
   Fonction qui réalise une prédiction à partir du JSON.
   """
   # Parse JSON
-  params_dict = eval(params_json)
+  # params_dict = eval(params_json) # dict
   # Encoder
-  params_enc = encode_features(params_dict) # dict
+  params_enc = encode_features(params_json) # dict
   # Convert into DataFrame
-  params_enc_df = pd.DataFrame(params_enc, index=[0])
+  params_enc_df = pd.DataFrame(params_enc, index=[0]) # df
   # Scaler
   params_scaled = scaler.transform(params_enc_df) # ndarray
   # Prediction
@@ -104,45 +100,34 @@ def make_prediction(params_json):
   return results
 
 
-ex_json_str = """{'age': 34, 'job': 'entrepreneur', 'marital': 'married', 'education': 'tertiary', 'default': 'yes', 'balance': 35266, 'housing': 'yes', 'loan': 'no', 'contact': 'telephone', 'day': 15, 'month': 'aug', 'duration': 80, 'campaign': 2, 'pdays': 1, 'previous': 5}"""
-
-pred = make_prediction(ex_json_str)
-print(pred)
-
 # Variables
 # Pydantic is the most widely used data validation library for Python.
-# class PredictParams(BaseModel):
-#   age : int
-#   job : str
-#   marital : str
-#   education : str
-#   default : str
-#   balance : int
-#   housing : str
-#   loan : str
-#   contact : str
-#   day : int
-#   month : str
-#   duration : int
-#   campaign : int
-#   pdays : int
-#   previous : int
+class PredictParams(BaseModel):
+  age : int
+  job : str
+  marital : str
+  education : str
+  default : str
+  balance : int
+  housing : str
+  loan : str
+  contact : str
+  day : int
+  month : str
+  duration : int
+  campaign : int
+  pdays : int
+  previous : int
 
-# # API
-# @app.post("/predict", tags=['POST'])
-# def predict(params:PredictParams):
+# API
+@app.post("/predict", tags=['POST'])
+def predict(params:PredictParams):
 
-#   if params == None:
-#     return "Please enter parameters."
+  # if params == None:
+  #   return "Please enter parameters."
   
-#   # Parameters encoding
-  
-#   # Prediction
+  return make_prediction(params)
 
-#   # Sortie : 
-#   # la réponse du modèle
-#   # le score de précision
-#   # (Bonus : Les variables ayant le plus contribué à la réponse du modèle dans un dictionnaire).
 
-# if __name__ == '__main__':
-#   uvicorn.run(app, host='0.0.0.0', port=8000)
+if __name__ == '__main__':
+  uvicorn.run(app, host='0.0.0.0', port=8000)
