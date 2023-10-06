@@ -8,6 +8,7 @@
 # ==============================================================================
 
 import base64
+import json
 import requests
 import streamlit as st
 import os
@@ -136,6 +137,10 @@ def send_to_api(age, job, marital, education, default, balance, housing, loan,
     elif contact == "téléphone": contact = "telephone"
     elif contact == "cellulaire": contact = "cellular"
 
+    ## -- Date
+    if day == None: day = 0
+    if month == None: month = 'jan'
+
     ## - Boolean transformation to yes / no string
     default = "yes" if default == True else "no"
     loan = "yes" if loan == True else "no"
@@ -161,11 +166,15 @@ def send_to_api(age, job, marital, education, default, balance, housing, loan,
         "previous": previous
     }
 
-    print(for_predict)
     response = requests.post('https://api-isen-g4-6efab73bbf58.herokuapp.com/predict', 
                              json=for_predict)
-    print("Resultat: ", response)
-    # return response
+    response = validation_response(response)
+
+    result = response['prediction']
+    score = response['score']
+
+    return result, score
+
 
 def get_feature_important():
     pickel_file_path = "modele_data.pkl"
@@ -181,7 +190,12 @@ def import_pickle_object(pickle_file_path):
         print("The file does not exist.")
     return pickled_object
 
-
+def validation_response(response):
+    """Valid the response.status_code, if 200 return the response"""
+    if response.status_code == 200:
+        return response.json()
+    else:
+        print("Erreur: ", response.status_code)
 
 
 # ---------------------------------------------------------------------------- #
@@ -227,7 +241,7 @@ def forms():
             space()
 
             balance = st.slider('Salaire Moyen Annuel :', min_value=0, 
-                                max_value=100_000, value=30_000)
+                                max_value=100_000, value=30_000, step=500)
 
             subcol1, subcol2, subcol3 = st.columns([1, 1, 1])
             with subcol1: default = st.toggle('Crédit en défaut')
@@ -274,18 +288,19 @@ def forms():
             with colF2:
                 space()
                 if st.form_submit_button("Valider"):
-                    if job != None:
+                    if (job is not None) and (day is not None) and (month is not None):
                         with st.spinner("Wait a minute"):
-                            result = send_to_api(age, job, marital, education, 
+                            st.session_state['result'], st.session_state['score'] = send_to_api(age, job, marital, education, 
                                 default, balance, housing, loan, contact, day, 
                                 month, duration, campaign, pdays, previous)
                     else:
-                        st.write("Job pas rempli")
+                        st.error("Un des champs suivants n'est pas rempli: Catégorie d'emploi, jour et mois")
+                        st.stop()
 
                     # get_feature_important()
 
                     ## - pass to result
-                    st.session_state.init_form = False 
+                    st.session_state.init_form = False
                     st.rerun()
 
 
@@ -301,6 +316,8 @@ def response_page():
     col3.metric(label="No Change", value=5000, delta=0)
     style_metric_cards()
 
+    st.write(st.session_state.result)
+    st.write(st.session_state.score)
     st.button("Refaire une simulation", type="primary")
     if st.button:
         st.session_state.init_form = True
