@@ -14,11 +14,13 @@ import requests
 import streamlit as st
 import os
 import pickle
+import plotly.graph_objects as go
 
 from PIL import Image
 from streamlit_extras.metric_cards import style_metric_cards
 from streamlit_card import card
 from streamlit_modal import Modal
+
 
 
 ## --- APP --- ##
@@ -92,8 +94,21 @@ def space():
 
 #### -- PREDICT
 
-def display_score():
-    pass
+def display_score(score):
+    fig = go.Figure(go.Indicator(
+        mode = "gauge+number",
+        value = score * 100,
+        domain = {'x': [0, 1], 'y': [0, 1]},
+        title = {'text': "Fiabilité du résultat", 'font': {'size': 24}},
+        gauge = {
+            'axis': {'range': [None, 100], 'tickwidth': 1, 'tickcolor': "darkblue"},
+            'bar': {'color': "#fca311"},
+            'bgcolor': "white",
+        }))
+
+    st.plotly_chart(fig, theme="streamlit", use_container_width=True)
+
+
 
 def send_to_api(age, job, marital, education, default, balance, housing, loan, 
                 contact, day, month, duration, campaign, pdays, previous):
@@ -208,6 +223,7 @@ def validation_response(response):
         return response.json()
     else:
         print("Erreur: ", response.status_code)
+
 
 
 
@@ -336,11 +352,14 @@ def response_page():
             title="Yeah",
             text="Selon votre situation, c'est good",
         )
+        display_score(st.session_state.score)
     else:
         card(
             title="Désolé",
             text="Votre situation ne le permet pas",
         )
+        display_score(st.session_state.score)
+
 
     # col1, col2, col3 = st.columns(3)
     # col1.metric(label="Gain", value=5000, delta=1000)
