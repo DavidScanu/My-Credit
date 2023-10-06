@@ -3,3 +3,5 @@
 .credenv/
 .env
 .env/
+__pycache__
+.vscode/
