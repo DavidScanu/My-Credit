@@ -19,6 +19,7 @@ from streamlit_modal import Modal
 
 ## --- APP --- ##
 
+#### -- UTILS UI
 def center_radio():
     """Center the radio button on the form"""
     st.markdown("""
@@ -30,15 +31,15 @@ def center_radio():
         </style>
     """, unsafe_allow_html=True)
 
-
-def space():
-    """Add a break line"""
+def set_bg_form():
     st.markdown("""
         <style>
-            <br>
+        [data-testid="stForm"] {
+            background-color: white;
+            color: white;
+        }
         </style>
     """, unsafe_allow_html=True)
-
 
 def set_background(background_img):
     """Set the app background with image in jpg format
@@ -65,6 +66,20 @@ def set_background(background_img):
         unsafe_allow_html=True,
     )
 
+def space():
+    """Add a break line"""
+    st.markdown("""
+        <style>
+            <br>
+        </style>
+    """, unsafe_allow_html=True)
+
+
+
+#### -- PREDICT
+
+def display_score():
+    pass
 
 def send_to_api(age, job, marital, education, default, balance, housing, loan, 
                 contact, day, month, duration, campaign, pdays, previous):
@@ -97,11 +112,11 @@ def send_to_api(age, job, marital, education, default, balance, housing, loan,
     """
 
     ## - Job
-    dict_job = {"admin.": 'admin.', "inconnu": 'unknown', "chômeur": 'unemployed', 
-                "gestion": 'management', "femme de ménage": 'housemaid', 
-                "entrepreneur": 'entrepreneur', "étudiant": 'student', 
-                "col bleu": 'blue-collar', "indépendant": 'self-employed', 
-                "retraité": 'retired', "technicien": 'technician', "services": 'services'}
+    dict_job = {"admin.": "admin.", "inconnu": "unknown", "chômeur": "unemployed", 
+                "gestion": "management", "femme de ménage": "housemaid", 
+                "entrepreneur": "entrepreneur", "étudiant": "student", 
+                "col bleu": "blue-collar", "indépendant": "self-employed", 
+                "retraité": "retired", "technicien": "technician", "services": "services"}
 
     job = dict_job[job]
 
@@ -122,9 +137,9 @@ def send_to_api(age, job, marital, education, default, balance, housing, loan,
     elif contact == "cellulaire": contact = "cellular"
 
     ## - Boolean transformation to yes / no string
-    default = 'yes' if default == True else 'no'
-    loan = 'yes' if loan == True else 'no'
-    housing = 'yes' if housing == True else 'no'
+    default = "yes" if default == True else "no"
+    loan = "yes" if loan == True else "no"
+    housing = "yes" if housing == True else "no"
     pdays = 1 if pdays == True else 0
 
     ## - Dictionary creation for send to api
@@ -147,14 +162,16 @@ def send_to_api(age, job, marital, education, default, balance, housing, loan,
     }
 
     print(for_predict)
-    # response = requests.post('http://', json=for_predict)
-
+    response = requests.post('https://api-isen-g4-6efab73bbf58.herokuapp.com/predict', 
+                             json=for_predict)
+    print("Resultat: ", response)
     # return response
 
-
-def display_score():
-    pass
-
+def get_feature_important():
+    pickel_file_path = "modele_data.pkl"
+    pickled_object = import_pickle_object(pickel_file_path)
+    feature_importance = pickled_object['feature_importance']
+    return feature_importance
 
 def import_pickle_object(pickle_file_path):
     if os.path.exists(pickle_file_path):
@@ -165,13 +182,9 @@ def import_pickle_object(pickle_file_path):
     return pickled_object
 
 
-def get_feature_important():
-    pickel_file_path = "modele_data.pkl"
-    pickled_object = import_pickle_object(pickel_file_path)
-    feature_importance = pickled_object['feature_importance']
-    return feature_importance
 
 
+# ---------------------------------------------------------------------------- #
 ## --- FORM PAGE --- ##
 def forms():
     """Display the 'My-Credit' form"""
@@ -185,9 +198,7 @@ def forms():
     with col2:
         with st.form("My-Credit"):
             head1, head2, head3 = st.columns([1, 1, 1])
-
-            with head2:
-                st.header("My-Credit")
+            with head2: st.header("My-Credit")
 
             st.markdown("----", unsafe_allow_html=True)
 
@@ -204,6 +215,7 @@ def forms():
             marital = st.radio("Situation Maritale", ["Célibataire", "Marié.e", "Divorcé.e"],
                 horizontal=True, label_visibility='hidden')
             space()
+
             education = st.radio("Votre niveau d'étude :", ["Inconnu", 
                 "secondaire", "primaire", "tertiaire"], horizontal=True)
 
@@ -213,15 +225,14 @@ def forms():
                 "technicien", "services"), 
                 index=None, placeholder="Catégorie d'emploi", label_visibility="hidden")
             space()
-            balance = st.slider('Salaire Moyen Annuel :', min_value=0, max_value=100_000, value=30_000)
+
+            balance = st.slider('Salaire Moyen Annuel :', min_value=0, 
+                                max_value=100_000, value=30_000)
 
             subcol1, subcol2, subcol3 = st.columns([1, 1, 1])
-            with subcol1:
-                default = st.toggle('Crédit en défaut')
-            with subcol2:
-                housing = st.toggle('Prêt Logement')
-            with subcol3:
-                loan = st.toggle('Prêt Personnel')
+            with subcol1: default = st.toggle('Crédit en défaut')
+            with subcol2: housing = st.toggle('Prêt Logement')
+            with subcol3: loan = st.toggle('Prêt Personnel')
 
             st.markdown("----", unsafe_allow_html=True)
             st.markdown(
@@ -233,10 +244,13 @@ def forms():
             )
 
             pdays = st.toggle('Avez vous été contactés par nos services ?')
+
             contact = st.radio("contact_type", ["inconnu", "téléphone", "cellulaire"],
                                 horizontal=True, label_visibility="hidden")
             space()
+
             campaign = st.number_input("Nombre de contact cette année", step=1)
+ 
             previous = st.number_input("Nombre de contact années passées", step=1)
 
             day_col, month_col = st.columns([1, 1])
@@ -244,13 +258,15 @@ def forms():
                 day = st.selectbox("day",
                     (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 
                     18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31),
-                    index=None, placeholder="jour du dernier contact", label_visibility="hidden")
+                    index=None, placeholder="jour du dernier contact", 
+                    label_visibility="hidden")
 
             with month_col:
                 month = st.selectbox("month",
                     ("jan", "feb", "mar", "apr", "may", "jun", 
                     "jul", "aug", "sep", "oct", "nov", "dec"),
-                    index=None, placeholder="mois du dernier contact", label_visibility="hidden")
+                    index=None, placeholder="mois du dernier contact", 
+                    label_visibility="hidden")
 
             duration = st.number_input("Durée du contact (en seconde)", step=10)
 
@@ -258,10 +274,13 @@ def forms():
             with colF2:
                 space()
                 if st.form_submit_button("Valider"):
-                    with st.spinner("Wait a minute"):
-                        result = send_to_api(age, job, marital, education, default, 
-                            balance, housing, loan, contact, day, month, duration, 
-                            campaign, pdays, previous)
+                    if job != None:
+                        with st.spinner("Wait a minute"):
+                            result = send_to_api(age, job, marital, education, 
+                                default, balance, housing, loan, contact, day, 
+                                month, duration, campaign, pdays, previous)
+                    else:
+                        st.write("Job pas rempli")
 
                     # get_feature_important()
 
@@ -270,6 +289,8 @@ def forms():
                     st.rerun()
 
 
+
+# ---------------------------------------------------------------------------- #
 ## --- RESPONSE PAGE --- ##
 def response_page():
     st.write("Ladies & Gentlemen, here the answer !")
@@ -280,11 +301,7 @@ def response_page():
     col3.metric(label="No Change", value=5000, delta=0)
     style_metric_cards()
 
-
     st.button("Refaire une simulation", type="primary")
     if st.button:
         st.session_state.init_form = True
         st.rerun
-
-
-
