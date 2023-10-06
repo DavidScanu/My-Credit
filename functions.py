@@ -9,12 +9,15 @@
 
 import base64
 import json
+import pygal
 import requests
 import streamlit as st
 import os
 import pickle
 
+from PIL import Image
 from streamlit_extras.metric_cards import style_metric_cards
+from streamlit_card import card
 from streamlit_modal import Modal
 
 
@@ -198,6 +201,8 @@ def validation_response(response):
         print("Erreur: ", response.status_code)
 
 
+
+
 # ---------------------------------------------------------------------------- #
 ## --- FORM PAGE --- ##
 def forms():
@@ -224,7 +229,7 @@ def forms():
                 """, unsafe_allow_html=True
             )
 
-            age = st.slider('Votre âge :', 18, 130, 25)
+            age = st.slider('Votre âge :', 18, 90, 30)
 
             marital = st.radio("Situation Maritale", ["Célibataire", "Marié.e", "Divorcé.e"],
                 horizontal=True, label_visibility='hidden')
@@ -240,8 +245,8 @@ def forms():
                 index=None, placeholder="Catégorie d'emploi", label_visibility="hidden")
             space()
 
-            balance = st.slider('Salaire Moyen Annuel :', min_value=0, 
-                                max_value=100_000, value=30_000, step=500)
+            balance = st.slider('Solde Annuel Moyen:', min_value=-10_000, 
+                                max_value=80_000, value=30_000, step=500)
 
             subcol1, subcol2, subcol3 = st.columns([1, 1, 1])
             with subcol1: default = st.toggle('Crédit en défaut')
@@ -282,7 +287,8 @@ def forms():
                     index=None, placeholder="mois du dernier contact", 
                     label_visibility="hidden")
 
-            duration = st.number_input("Durée du contact (en seconde)", step=10)
+            duration = st.number_input("Durée du contact (en seconde)", 
+                                       max_value=5_000, step=5)
 
             colF1,colF2,colF3 = st.columns([2, 1, 2])
             with colF2:
@@ -305,19 +311,28 @@ def forms():
 
 
 
+
 # ---------------------------------------------------------------------------- #
 ## --- RESPONSE PAGE --- ##
 def response_page():
-    st.write("Ladies & Gentlemen, here the answer !")
 
-    col1, col2, col3 = st.columns(3)
-    col1.metric(label="Gain", value=5000, delta=1000)
-    col2.metric(label="Loss", value=5000, delta=-1000)
-    col3.metric(label="No Change", value=5000, delta=0)
-    style_metric_cards()
+    if st.session_state.result == 1:
+        card(
+            title="Yeah",
+            text="Selon votre situation, c'est good",
+        )
+    else:
+        card(
+            title="Désolé",
+            text="Votre situation ne le permet pas",
+        )
 
-    st.write(st.session_state.result)
-    st.write(st.session_state.score)
+    # col1, col2, col3 = st.columns(3)
+    # col1.metric(label="Gain", value=5000, delta=1000)
+    # col2.metric(label="Loss", value=5000, delta=-1000)
+    # col3.metric(label="No Change", value=5000, delta=0)
+    # style_metric_cards()
+
     st.button("Refaire une simulation", type="primary")
     if st.button:
         st.session_state.init_form = True
