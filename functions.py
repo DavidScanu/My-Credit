@@ -45,6 +45,16 @@ def set_bg_form():
         </style>
     """, unsafe_allow_html=True)
 
+def right_button():
+    st.markdown("""
+        <style>
+        [data-testid="baseButton-primary"] {
+            display: block;
+            float: right;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+
 def set_background(background_img):
     """Set the app background with image in jpg format
 
@@ -178,7 +188,6 @@ def send_to_api(age, job, marital, education, default, balance, housing, loan,
 
     return result, score
 
-
 def get_feature_important():
     pickel_file_path = "modele_data.pkl"
     pickled_object = import_pickle_object(pickel_file_path)
@@ -199,6 +208,7 @@ def validation_response(response):
         return response.json()
     else:
         print("Erreur: ", response.status_code)
+
 
 
 
@@ -316,6 +326,11 @@ def forms():
 ## --- RESPONSE PAGE --- ##
 def response_page():
 
+    st.button("Refaire une simulation", type="primary")
+    if st.button:
+        st.session_state.init_form = True
+        st.rerun
+
     if st.session_state.result == 1:
         card(
             title="Yeah",
@@ -333,7 +348,4 @@ def response_page():
     # col3.metric(label="No Change", value=5000, delta=0)
     # style_metric_cards()
 
-    st.button("Refaire une simulation", type="primary")
-    if st.button:
-        st.session_state.init_form = True
-        st.rerun
+
