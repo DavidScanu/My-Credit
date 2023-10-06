@@ -127,7 +127,7 @@ def predict(params: PredictParams):
     return "Please enter parameters."
 
   # https://docs.pydantic.dev/latest/concepts/serialization/
-  # Serialise le Model Pydantic en Dictionnaire
+  # Serialise le Model Pydantic en Dictionnaire Python
   params_dict = params.model_dump()
   pred = make_prediction(params_dict) # dict
   # Optionnel : Serialiser la pred
