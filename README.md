@@ -33,10 +33,16 @@
 [![fastapi][fastapi-shield]][fastapi-url]
 
 
-## Groupe 4 : 
+## Groupe 4
 - Antoine Ancelin (Modèle)
 - Charley Lebarbier (Front-end)
 - David Scanu (Back-end, Tech lead)
+
+## Améliorations possibles
+- Changer l'algorithme du **modèle** (XGBoost est trop lourd pour Heroku)
+- Utiliser **OneHotEncoding** pour encoder les features
+- Utiliser un **pipeline** pour sauvegarder l'encoder et le scaler
+- Ajouter **MLFlow**
 
 <!-- ABOUT THE PROJECT -->
 ## Contexte du projet
