@@ -8,22 +8,16 @@
 # ==============================================================================
 
 import base64
-import json
-import pygal
 import requests
 import streamlit as st
 import os
 import pickle
 import plotly.graph_objects as go
 
-from PIL import Image
 from streamlit_extras.metric_cards import style_metric_cards
 from streamlit_card import card
 from streamlit_modal import Modal
 
-
-
-## --- APP --- ##
 
 #### -- UTILS UI
 def center_radio():
@@ -33,6 +27,26 @@ def center_radio():
         .stRadio [role=radiogroup]{
             align-items: center;
             justify-content: center;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+
+def center_checkbox():
+    st.markdown("""
+        <style>
+        [data-baseweb="checkbox"]{
+            align-items: center;
+            justify-content: center;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+
+def right_button():
+    st.markdown("""
+        <style>
+        [data-testid="baseButton-primary"] {
+            display: block;
+            float: right;
         }
         </style>
     """, unsafe_allow_html=True)
@@ -47,12 +61,12 @@ def set_bg_form():
         </style>
     """, unsafe_allow_html=True)
 
-def right_button():
+def set_bg_popover():
     st.markdown("""
         <style>
-        [data-testid="baseButton-primary"] {
-            display: block;
-            float: right;
+        .st-fe .st-fg{
+            background-color: white;
+            color: black;
         }
         </style>
     """, unsafe_allow_html=True)
@@ -89,7 +103,6 @@ def space():
             <br>
         </style>
     """, unsafe_allow_html=True)
-
 
 
 #### -- PREDICT
@@ -236,14 +249,22 @@ def forms():
 
     ## - Config Form
     center_radio()
+    center_checkbox()
+    set_bg_form()
+    set_bg_popover()
 
     ## -- Form
     col1, col2, col3 = st.columns([1, 2, 1])
 
     with col2:
         with st.form("My-Credit"):
-            head1, head2, head3 = st.columns([1, 1, 1])
-            with head2: st.header("My-Credit")
+            st.markdown(
+                """
+                <div style="text-align:center; margin-bottom:20px;">
+                    <h2>💳 Simulation de Crédit 💳</h2>
+                </div>
+                """, unsafe_allow_html=True
+            )
 
             st.markdown("----", unsafe_allow_html=True)
 
@@ -341,7 +362,10 @@ def forms():
 # ---------------------------------------------------------------------------- #
 ## --- RESPONSE PAGE --- ##
 def response_page():
+    ## - Config
+    right_button()
 
+    ## ------ ##
     st.button("Refaire une simulation", type="primary")
     if st.button:
         st.session_state.init_form = True

@@ -21,8 +21,9 @@ st.set_page_config(page_title='My-Credit : Simulation de crédit',
 ## -- Background (if we want it)
 # set_background("assets/background-pawel-czerwinski.jpg")
 
-set_bg_form()
-right_button()
+
+
+
 
 
 if 'init_form' not in st.session_state:
