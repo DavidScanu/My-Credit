@@ -17,15 +17,15 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/DavidScanu/My-Credit">
+  <a href="https://github.com/DavidScanu/My-Credit" target="_blank">
     <img src="https://avatars.githubusercontent.com/u/70485959?v=4" alt="Logo" width="120" height="120">
   </a>
   <h3>My Credit - Back-End (API)</h3>
   <h3>Développement de l'API de l'application "My Credit".</h3>
 </div>
-<a href="https://api-isen-g4-6efab73bbf58.herokuapp.com/docs">API Documentation</a></li>
+<a href="https://api-isen-g4-6efab73bbf58.herokuapp.com/docs" target="_blank">API Documentation</a></li>
 </br>
-<a href="https://my-credit-isen-group-4.streamlit.app/">View Demo</a></li>
+<a href="https://my-credit-isen-group-4.streamlit.app/" target="_blank">View Demo</a></li>
 
 <!-- Built With -->
 ### Built With
