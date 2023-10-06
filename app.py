@@ -69,15 +69,12 @@ def encode_features(params_json_dict):
         params_json_dict[key] = value_encoded
   return params_json_dict
 
-# testing model prediction
-# pred = model.predict(scaler.fit_transform([range(15)]))
-# pred_proba = model.predict_proba([range(15)])
-# print(pred_proba)
 
 # Prediction
-def make_prediction(params_json):
+def make_prediction(params_json: dict) -> dict:
   """
   Fonction qui réalise une prédiction à partir du JSON.
+  La fonction accepte un dictionnaire en entrée et renvoie 
   """
   # Parse JSON
   # params_dict = eval(params_json) # dict
@@ -89,8 +86,8 @@ def make_prediction(params_json):
   params_scaled = scaler.transform(params_enc_df) # ndarray
   # Prediction
   pred_proba = model.predict_proba(params_scaled)
-  y_pred = np.argmax(pred_proba)
-  pred_score = pred_proba.max()
+  y_pred = int(np.argmax(pred_proba))
+  pred_score = float(pred_proba.max())
   # Results
   results = {
     "prediction" : y_pred,
@@ -99,6 +96,9 @@ def make_prediction(params_json):
   }
   return results
 
+# Test de la fonction de prédiction
+# ex_json_dict = eval("""{'age': 34, 'job': 'entrepreneur', 'marital': 'married', 'education': 'tertiary', 'default': 'yes', 'balance': 35266, 'housing': 'yes', 'loan': 'no', 'contact': 'telephone', 'day': 15, 'month': 'aug', 'duration': 80, 'campaign': 2, 'pdays': 1, 'previous': 5}""")
+# print(make_prediction(ex_json_dict))
 
 # Variables
 # Pydantic is the most widely used data validation library for Python.
@@ -121,12 +121,18 @@ class PredictParams(BaseModel):
 
 # API
 @app.post("/predict", tags=['POST'])
-def predict(params:PredictParams):
+def predict(params: PredictParams):
 
-  # if params == None:
-  #   return "Please enter parameters."
-  
-  return make_prediction(params)
+  if params == None:
+    return "Please enter parameters."
+
+  # https://docs.pydantic.dev/latest/concepts/serialization/
+  # Serialise le Model Pydantic en Dictionnaire
+  params_dict = params.model_dump()
+  pred = make_prediction(params_dict) # dict
+  # Optionnel : Serialiser la pred
+  pred_json = json.dumps(pred)
+  return pred
 
 
 if __name__ == '__main__':
