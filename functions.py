@@ -8,15 +8,12 @@
 # ==============================================================================
 
 import base64
+import plotly.graph_objects as go
 import requests
 import streamlit as st
-import os
-import pickle
-import plotly.graph_objects as go
 
-from streamlit_extras.metric_cards import style_metric_cards
 from streamlit_card import card
-from streamlit_modal import Modal
+from streamlit_extras.metric_cards import style_metric_cards
 
 
 #### -- UTILS UI
@@ -118,10 +115,9 @@ def display_score(score):
             'bar': {'color': "#fca311"},
             'bgcolor': "white",
         }))
+    fig.update_layout(height=300)
 
     st.plotly_chart(fig, theme="streamlit", use_container_width=True)
-
-
 
 def send_to_api(age, job, marital, education, default, balance, housing, loan, 
                 contact, day, month, duration, campaign, pdays, previous):
@@ -216,28 +212,12 @@ def send_to_api(age, job, marital, education, default, balance, housing, loan,
 
     return result, score
 
-def get_feature_important():
-    pickel_file_path = "modele_data.pkl"
-    pickled_object = import_pickle_object(pickel_file_path)
-    feature_importance = pickled_object['feature_importance']
-    return feature_importance
-
-def import_pickle_object(pickle_file_path):
-    if os.path.exists(pickle_file_path):
-        with open(pickle_file_path, "rb") as f:
-            pickled_object = pickle.load(f)
-    else:
-        print("The file does not exist.")
-    return pickled_object
-
 def validation_response(response):
     """Valid the response.status_code, if 200 return the response"""
     if response.status_code == 200:
         return response.json()
     else:
         print("Erreur: ", response.status_code)
-
-
 
 
 
@@ -350,8 +330,6 @@ def forms():
                         st.error("Un des champs suivants n'est pas rempli: Catégorie d'emploi, jour et mois")
                         st.stop()
 
-                    # get_feature_important()
-
                     ## - pass to result
                     st.session_state.init_form = False
                     st.rerun()
@@ -385,10 +363,10 @@ def response_page():
         display_score(st.session_state.score)
 
 
-    # col1, col2, col3 = st.columns(3)
-    # col1.metric(label="Gain", value=5000, delta=1000)
-    # col2.metric(label="Loss", value=5000, delta=-1000)
-    # col3.metric(label="No Change", value=5000, delta=0)
-    # style_metric_cards()
+    col1, col2, col3 = st.columns(3)
+    col1.metric(label="Duration", value=800)
+    col2.metric(label="Balance", value=790)
+    col3.metric(label="Age", value=760)
+    style_metric_cards()
 
 

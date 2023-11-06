@@ -7,7 +7,6 @@
 # Streamlit Main
 # ==============================================================================
 
-
 import streamlit as st
 
 from functions import *
@@ -18,18 +17,11 @@ st.set_page_config(page_title='My-Credit : Simulation de crédit',
                    page_icon="assets/favicon-32x32.png",
                    layout='wide')
 
-## -- Background (if we want it)
-# set_background("assets/background-pawel-czerwinski.jpg")
-
-
-
-
-
 
 if 'init_form' not in st.session_state:
     st.session_state.init_form = True
 
 if st.session_state.init_form:
-        forms()
+    forms()
 else:
     response_page()
