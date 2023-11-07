@@ -10,7 +10,7 @@ heroku container:login
 # Build Image MAC ARM
 #docker buildx build --platform linux/amd64 -t streamlit-isen-g4 .
 
-# Build Image 
+# Build Image Windows
 docker build -t streamlit-isen-g4 .
 
 # Tag Image to Heroku app

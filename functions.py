@@ -363,7 +363,6 @@ def response_page():
         )
         display_score(st.session_state.score)
 
-
     # col1, col2, col3 = st.columns(3)
     # col1.metric(label="Duration", value=800)
     # col2.metric(label="Balance", value=790)

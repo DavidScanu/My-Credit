@@ -8,4 +8,6 @@ RUN pip install streamlit --upgrade
 
 COPY . .
 
+RUN python -m unittest -v test.py
+
 CMD streamlit run app.py --server.port $PORT
