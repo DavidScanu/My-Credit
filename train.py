@@ -51,7 +51,7 @@ with mlflow.start_run(experiment_id=experiment.experiment_id, run_name=run_name)
 
 
     mlflow.sklearn.log_model(model,                     # Sauvegarde du modèle
-                            "model my-credit",          # Nom du modèle
+                            "model_my-credit",          # Nom du modèle
                             signature=signature,        # Informations sur les colonnes en entrée
                             input_example=data.drop("y", axis=1).head(1),  # Exemple d'entrée
                             registered_model_name="my-credit_model"   # Nom du modèle enregistré
