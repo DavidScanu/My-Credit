@@ -24,8 +24,9 @@
   <h3>Développement de l'API de l'application "My Credit".</h3>
 </div>
 <ul>
-<li><a href="https://api-isen-g4-6efab73bbf58.herokuapp.com/docs" target="_blank">API - Documentation de l'API</a></li>
-<li><a href="https://my-credit-isen-group-4.streamlit.app/" target="_blank">APP - Demonstration de l'app Streamlit</a></li>
+<li><a href="https://api-isen-g4-6efab73bbf58.herokuapp.com/docs" target="_blank">Documentation de l'API (Heroku)</a></li>
+<li><a href="https://streamlit-isen-g4-15998d733b92.herokuapp.com/" target="_blank">Application Streamlit (Heroku)</a></li>
+<li><a href="https://my-credit-isen-group-4.streamlit.app/" target="_blank">Application Streamlit (Streamlit Cloud)</a></li>
 <li><a href="https://docs.google.com/presentation/d/1ok4Yt8M9RsFvn8HT-luv4DpzHH3nC9ZiAnbYC8zrWwc/edit?usp=sharing" target="_blank">Documment de formation - Kevin Duranty</a></li>
 </ul>
 
@@ -164,3 +165,9 @@ Project Link: [https://github.com/DavidScanu/My-Credit](https://github.com/David
 <!-- Fast API -->
 [fastapi-shield]: https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=FastAPI&logoColor=white
 [fastapi-url]: https://fastapi.tiangolo.com/fr/
+
+<!-- Streamlit -->
+
+
+<!-- Docker -->
+
