@@ -20,8 +20,8 @@
   <a href="https://github.com/DavidScanu/My-Credit" target="_blank">
     <img src="https://avatars.githubusercontent.com/u/70485959?v=4" alt="Logo" width="120" height="120">
   </a>
-  <h3>My Credit - Back-End (API)</h3>
-  <h3>Développement de l'API de l'application "My Credit".</h3>
+  <h3>My Credit</h3>
+  <h3>Développement de l'application "My Credit".</h3>
 </div>
 <ul>
 <li><a href="https://api-isen-g4-6efab73bbf58.herokuapp.com/docs" target="_blank">Documentation de l'API (Heroku)</a></li>
