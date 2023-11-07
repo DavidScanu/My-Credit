@@ -96,10 +96,6 @@ def make_prediction(params_json: dict) -> dict:
   }
   return results
 
-# Test de la fonction de prédiction
-# ex_json_dict = eval("""{'age': 34, 'job': 'entrepreneur', 'marital': 'married', 'education': 'tertiary', 'default': 'yes', 'balance': 35266, 'housing': 'yes', 'loan': 'no', 'contact': 'telephone', 'day': 15, 'month': 'aug', 'duration': 80, 'campaign': 2, 'pdays': 1, 'previous': 5}""")
-# print(make_prediction(ex_json_dict))
-
 # Variables
 # Pydantic is the most widely used data validation library for Python.
 class PredictParams(BaseModel):
