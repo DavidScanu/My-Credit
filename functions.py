@@ -146,7 +146,7 @@ def send_to_api(age, job, marital, education, default, balance, housing, loan,
 
     Example
     ------
-    >>> send_to_api(59, "Marié.e", "tertiaire", "entrepreneur", 30000, True,
+    >>> send_to_api(59, "entrepreneur", "Marié.e", "tertiaire", True, 30000,
       True, False, True, "téléphone", 2, 5, 4, jul, 60)
     """
 
