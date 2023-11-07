@@ -3,6 +3,8 @@
 .credenv/
 .env
 .env/
+.venv
+**/.venv
 __pycache__
 .vscode/
 MLOps_avec_MLFlow.ipynb
