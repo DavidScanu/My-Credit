@@ -34,7 +34,7 @@
 ### Built With
 
 [![fastapi][fastapi-shield]][fastapi-url]
-
+![Streamlit](https://img.shields.io/static/v1?style=for-the-badge&message=Streamlit&color=FF4B4B&logo=Streamlit&logoColor=FFFFFF&label=)
 
 ## Groupe 4
 - Antoine Ancelin (Modèle)
