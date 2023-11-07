@@ -102,7 +102,7 @@ Le projet sera à réaliser en trois jours, chaque équipe est constituée de 3 
 ## Contact
 
 - Antoine Ancelin
-- Charley Lebarbier
+- Charley Lebarbier [@charley∆L](https://github.com/CharleyDL)
 - David Scanu - [@davidsca_](https://twitter.com/davidsca_) - davidscanu14@gmail.com
 
 Project Link: [https://github.com/DavidScanu/My-Credit](https://github.com/DavidScanu/My-Credit)
