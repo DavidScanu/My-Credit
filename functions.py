@@ -368,5 +368,3 @@ def response_page():
     col2.metric(label="Balance", value=790)
     col3.metric(label="Age", value=760)
     style_metric_cards()
-
-
