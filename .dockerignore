@@ -3,6 +3,8 @@
 **/.vscode
 **/coverage
 **/.env
+**/.venv
+/.venv
 **/.aws
 **/.ssh
 Dockerfile
