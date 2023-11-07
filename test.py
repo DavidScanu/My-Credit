@@ -1,7 +1,6 @@
+import functions    ## -- functions.py
 import os
 import unittest
-
-import functions
 
 
 
@@ -75,7 +74,7 @@ class TestFunctionsPresence(unittest.TestCase):
 
 class TestRequestAPIFunction(unittest.TestCase):
     """Test the function for sending form data to the prediction API.
-    Two functions are test : send_to_api and validation_response
+    The function send_to_api() call validation_response()
     """
 
     def test_request_api(self):
