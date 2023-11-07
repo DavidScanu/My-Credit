@@ -62,7 +62,7 @@ def set_bg_form():
 def set_bg_popover():
     st.markdown("""
         <style>
-        .st-ff {
+        .st-ff .st-fh {
             background-color: white;
         }
         </style>
