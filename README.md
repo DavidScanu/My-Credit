@@ -60,9 +60,9 @@ En tant que data scientist, machine learning engineer, - installer et créer un 
 ## Modalités pédagogiques
 
 Le projet sera à réaliser en trois jours, chaque équipe est constituée de 3 développeurs, une par feature :
-- FRONT (developpement de l'application front)
-- BACK (développement de l'API back)
-- MODEL (entrainemment du modèle).
+- **FRONT** (developpement de l'application front)
+- **BACK** (développement de l'API back)
+- **MODEL** (entrainemment du modèle).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
