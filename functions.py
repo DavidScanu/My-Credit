@@ -39,6 +39,7 @@ def center_checkbox():
     """, unsafe_allow_html=True)
 
 def right_button():
+    """Create a button at right of the window"""
     st.markdown("""
         <style>
         [data-testid="baseButton-primary"] {
@@ -61,9 +62,8 @@ def set_bg_form():
 def set_bg_popover():
     st.markdown("""
         <style>
-        .st-fe .st-fg{
+        .st-ff {
             background-color: white;
-            color: black;
         }
         </style>
     """, unsafe_allow_html=True)
@@ -105,6 +105,7 @@ def space():
 #### -- PREDICT
 
 def display_score(score):
+    """Display the Fiability Gauge Score from the prediction"""
     fig = go.Figure(go.Indicator(
         mode = "gauge+number",
         value = score * 100,
@@ -363,8 +364,8 @@ def response_page():
         display_score(st.session_state.score)
 
 
-    col1, col2, col3 = st.columns(3)
-    col1.metric(label="Duration", value=800)
-    col2.metric(label="Balance", value=790)
-    col3.metric(label="Age", value=760)
-    style_metric_cards()
+    # col1, col2, col3 = st.columns(3)
+    # col1.metric(label="Duration", value=800)
+    # col2.metric(label="Balance", value=790)
+    # col3.metric(label="Age", value=760)
+    # style_metric_cards()
