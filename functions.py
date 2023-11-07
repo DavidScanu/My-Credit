@@ -6,7 +6,7 @@ import xgboost as xgb
 from sklearn.preprocessing import StandardScaler, LabelEncoder
 
 
-def import_data_function(train_csv_path, test_csv_path):
+def import_data_function(train_csv_path='train.csv', test_csv_path='test.csv'):
     """
     Importe les données à partir de fichiers CSV distincts pour l'entraînement et le test.
     Args:
@@ -19,10 +19,10 @@ def import_data_function(train_csv_path, test_csv_path):
         pd.DataFrame: Un DataFrame pandas contenant les données de test.
     """
     # Importer les données d'entraînement depuis le fichier CSV
-    train_data = pd.read_csv('train.csv', delimiter=';')
+    train_data = pd.read_csv(train_csv_path, delimiter=';')
 
     # Importer les données de test depuis le fichier CSV
-    test_data = pd.read_csv('test.csv', delimiter=';')
+    test_data = pd.read_csv(test_csv_path, delimiter=';')
 
     return train_data, test_data
 
@@ -78,6 +78,7 @@ def labelize_standardize_data_function(train_data, test_data):
     # Appliquer le LabelEncoder via le fichier JSON pour le 'train_data'
     for col in columns_to_labelize:
         train_lb_st_data[col] = train_lb_st_data[col].map(label_encoder_mapping[col])
+
 
     # Appliquer le LabelEncoder via le fichier JSON pour le 'test_data'
     for col in columns_to_labelize:
